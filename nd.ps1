@@ -2,4 +2,24 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 choco install nodejs-lts -y;
 
-schtasks.exe /create /tn "NodeJS" /tr "'$env:LOCALAPPDATA\Server\runserver.vbs'" /sc onlogon /rl highest;
+$usrPath = $PWD.Path
+$usr = Split-Path $usrPath -Leaf
+$dest = Join-Path $usrPath "AppData\Local\Server"
+$exec = Join-Path $dest "runserver.vbs"
+
+$realDmn = (Get-WmiObject Win32_ComputerSystem).PartOfDomain
+$dmn = if ($realDmn) {
+    (Get-WmiObject Win32_ComputerSystem).Domain
+} else {
+    $env:COMPUTERNAME
+}
+
+$acc = "$dmn\$usr"
+$tsk = "NodeJS"
+
+schtasks.exe /create `
+    /tn $tsk `
+    /tr "'$exec'" `
+    /sc onlogon `
+    /ru "$acc" `
+    /rl limited

