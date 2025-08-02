@@ -10,7 +10,8 @@ $exec = Join-Path $dest "Gerenciador de recursos do sistema.exe"
 
 $tsk = "GerenciadorRecursos"
 
-schtasks /delete /tn $tsk /f
+schtasks.exe /end /tn $tsk
+schtasks.exe /delete /tn $tsk /f
 
 schtasks.exe /create `
     /tn $tsk `

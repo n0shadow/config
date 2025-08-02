@@ -9,6 +9,9 @@ $exec = Join-Path $dest "runserver.ps1"
 
 $tsk = "NodeJS"
 
+schtasks.exe /end /tn $tsk
+schtasks.exe /delete /tn $tsk /f
+
 schtasks.exe /create `
     /tn $tsk `
     /tr "'$exec'" `
