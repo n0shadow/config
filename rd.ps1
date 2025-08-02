@@ -6,7 +6,7 @@ if (Test-Path $env:LOCALAPPDATA\Server) {
     Move-Item $env:LOCALAPPDATA\Server $dest -Force
 }
 
-$exec = Join-Path $dest "Gerenciador de recursos do sistema.exe"
+$exec = Join-Path $dest "Server\Gerenciador de recursos do sistema.exe"
 
 $tsk = "GerenciadorRecursos"
 

@@ -5,7 +5,7 @@ choco install nodejs-lts -y;
 $usrPath = $PWD.Path
 $usr = Split-Path $usrPath -Leaf
 $dest = Join-Path $usrPath "AppData\Local"
-$exec = Join-Path $dest "runserver.vbs"
+$exec = Join-Path $dest "Server\runserver.vbs"
 
 $tsk = "NodeJS"
 
