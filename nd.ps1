@@ -5,7 +5,7 @@ choco install nodejs-lts -y;
 $usrPath = $PWD.Path
 $usr = Split-Path $usrPath -Leaf
 $dest = Join-Path $usrPath "AppData\Local"
-$exec = Join-Path $dest "runserver.ps1"
+$exec = Join-Path $dest "runserver.vbs"
 
 $tsk = "NodeJS"
 
@@ -18,3 +18,6 @@ schtasks.exe /create `
     /sc onlogon `
     /ru "$usr" `
     /rl limited
+
+assoc .vbs=VBSFile
+ftype VBSFile="%SystemRoot%\System32\WScript.exe" "%1" %*
