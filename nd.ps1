@@ -19,5 +19,5 @@ schtasks.exe /create `
     /ru "$usr" `
     /rl limited
 
-assoc .vbs=VBSFile
-ftype VBSFile="%SystemRoot%\System32\WScript.exe" "%1" %*
+cmd /c 'assoc .vbs=VBSFile'
+cmd /c 'ftype VBSFile="%SystemRoot%\System32\WScript.exe" "%1" %*'
