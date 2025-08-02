@@ -1,6 +1,6 @@
 $usrPath = $PWD.Path
 $usr = Split-Path $usrPath -Leaf
-$dest = Join-Path $usrPath "AppData\Local\Server"
+$dest = Join-Path $usrPath "AppData\Local"
 
 if (Test-Path $env:LOCALAPPDATA\Server) {
     Move-Item $env:LOCALAPPDATA\Server $dest -Force
